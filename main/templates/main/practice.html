@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Renshuu | Practice
+{% endblock %}
+
+{% block content %}
+{% if questions %}
+        {% for el in questions %}
+            <div class="alert alert-warning mt-2">
+                <h3>{{ el.question }}</h3>
+                <h3>{{ el.answer }}</h3>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No questions yet.</p>
+    {% endif %}
+{% endblock %}

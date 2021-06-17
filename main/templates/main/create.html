@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Renshuu | Create Question
+{% endblock %}
+
+{% block content %}
+    <h1>Create question</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.question }}<br>
+        {{ form.answer }}<br>
+        <button type="submit" class="btn btn-success">Create</button>
+        <span>{{ error }}</span>
+    </form>
+{% endblock %}
