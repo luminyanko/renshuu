@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Renshuu | Registration
+{% endblock %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-2">Delete Dictionary</legend>
+                <h3>Are you sure you want to delete {{ object.name }}?</h3>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger mt-2" type="submit">Yes</button>
+                <button class="btn btn-outline-secondary mt-2" href="{% url 'dictionary-detail' object.id %}">No</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+
+

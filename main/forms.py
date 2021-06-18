@@ -22,11 +22,10 @@ class TaskForm(ModelForm):
 class DictionaryForm(ModelForm):
     class Meta:
         model = Dictionary
-        fields = ['name', 'creator']
+        fields = ['name']
         widgets = {
             'name': TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Enter dictionary name',
-            }),
-            'creator':  User.username
+            })
         }

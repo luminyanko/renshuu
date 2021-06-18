@@ -7,18 +7,32 @@ Renshuu | Practice
 
 {% block content %}
     {% if user.is_authenticated %}
-        <button type="button" class="btn btn-primary m-2"><a href="{% url 'create' %}" class="text-light text-decoration-none">Create new dictionary</a></button>
+        <legend class="border-bottom m-2">My Dictionaries</legend>
+        <button type="button" class="btn btn-primary m-2"><a href="{% url 'dictionary-create' %}" class="text-light text-decoration-none">Create new dictionary</a></button>
     {% endif %}
     {% if dicts %}
         <div class="d-flex flex-row justify-content-start">
         {% for el in dicts %}
+            {% if el.creator == user %}
             <div class="alert alert-primary m-2 ">
                     <h3><a href="{% url 'dictionary-detail' el.id %}" class="text-body text-decoration-none">{{ el.name }}</a></h3>
-                    <small>Created: {{ el.created }}</small><br>
-                    <small>by: {{ el.creator }}</small>
+                    <small>Created: {{ el.created }}</small>
             </div>
+            {% endif %}
         {% endfor %}
         </div>
+        <legend class="border-bottom m-2">Other Dictionaries</legend>
+        <div class="d-flex flex-row justify-content-start">
+            {% for el in dicts %}
+                {% if el.creator != user %}
+                <div class="alert alert-primary m-2 ">
+                        <h3><a href="{% url 'dictionary-detail' el.id %}" class="text-body text-decoration-none">{{ el.name }}</a></h3>
+                        <small>Created: {{ el.created }}</small><br>
+                        <small>by: {{ el.creator }}</small>
+                </div>
+                {% endif %}
+            {% endfor %}
+            </div>
     {% else %}
         <p>No cards yet.</p>
     {% endif %}
