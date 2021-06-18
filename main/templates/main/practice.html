@@ -1,18 +1,25 @@
 {% extends 'main/base.html' %}
+{% load static %}
 
 {% block title %}
 Renshuu | Practice
 {% endblock %}
 
 {% block content %}
-{% if questions %}
-        {% for el in questions %}
-            <div class="alert alert-warning mt-2">
-                <h3>{{ el.question }}</h3>
-                <h3>{{ el.answer }}</h3>
+    {% if user.is_authenticated %}
+        <button type="button" class="btn btn-primary m-2"><a href="{% url 'create' %}" class="text-light text-decoration-none">Create new dictionary</a></button>
+    {% endif %}
+    {% if dicts %}
+        <div class="d-flex flex-row justify-content-start">
+        {% for el in dicts %}
+            <div class="alert alert-primary m-2 ">
+                    <h3><a href="{% url 'dictionary-detail' el.id %}" class="text-body text-decoration-none">{{ el.name }}</a></h3>
+                    <small>Created: {{ el.created }}</small><br>
+                    <small>by: {{ el.creator }}</small>
             </div>
         {% endfor %}
+        </div>
     {% else %}
-        <p>No questions yet.</p>
+        <p>No cards yet.</p>
     {% endif %}
 {% endblock %}

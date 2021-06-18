@@ -1,6 +1,18 @@
 from django.shortcuts import render, redirect
-from .models import Task
-from .forms import TaskForm
+from django.views.generic import ListView, DetailView
+from .models import Task, Dictionary
+from .forms import TaskForm, DictionaryForm
+
+
+class DictionaryListView(ListView):
+    model = Dictionary
+    template_name = 'main/practice.html'
+    context_object_name = 'dicts'
+    ordering = ['-created']
+
+
+class DictionaryDetailView(DetailView):
+    model = Dictionary
 
 
 def index(request):
@@ -8,8 +20,10 @@ def index(request):
 
 
 def practice(request):
-    questions = Task.objects.all()
-    return render(request, 'main/practice.html', {'questions': questions})
+    context = {
+        'dicts': Dictionary.objects.all()
+    }
+    return render(request, 'main/practice.html', context)
 
 
 def about(request):
@@ -19,13 +33,13 @@ def about(request):
 def create(request):
     error = ''
     if request.method == 'POST':
-        form = TaskForm(request.POST)
+        form = DictionaryForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('home')
         else:
             error = 'Invalid input'
-    form = TaskForm()
+    form = DictionaryForm()
     context = {
         'form': form
     }

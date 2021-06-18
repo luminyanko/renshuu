@@ -1,5 +1,6 @@
-from .models import Task
+from .models import Task, Dictionary
 from django.forms import ModelForm, TextInput
+from django.contrib.auth.models import User
 
 
 class TaskForm(ModelForm):
@@ -15,4 +16,17 @@ class TaskForm(ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Enter answer'
             }),
+        }
+
+
+class DictionaryForm(ModelForm):
+    class Meta:
+        model = Dictionary
+        fields = ['name', 'creator']
+        widgets = {
+            'name': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter dictionary name',
+            }),
+            'creator':  User.username
         }
