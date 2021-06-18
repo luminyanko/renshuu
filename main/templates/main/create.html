@@ -1,15 +1,15 @@
 {% extends 'main/base.html' %}
+{% load static %}
 
 {% block title %}
-Renshuu | Create Question
+Renshuu | Create Dictionary
 {% endblock %}
 
 {% block content %}
-    <h1>Create question</h1>
+    <h1>Create dictionary</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.question }}<br>
-        {{ form.answer }}<br>
+        {{ form.name }}<br>
         <button type="submit" class="btn btn-primary">Create</button>
         <span>{{ error }}</span>
     </form>

@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+Renshuu | Dictionary
+{% endblock %}
+
+{% block content %}
+    <button type="button" class="btn btn-primary m-2"><a href="{% url 'practice' %}" class="text-light text-decoration-none">Back</a></button>
+    <div class="m-2">
+        <h3>{{ object.name }}</h3>
+        <small>Created: {{ object.created }}</small><br>
+        <small>by: {{ object.creator }}</small>
+    </div>
+{% endblock %}

@@ -15,16 +15,26 @@ Renshuu | Profile
           <p class="text-secondary">EXP: {{ user.profile.exp }}</p>
         </div>
       </div>
-      <form method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
-          <fieldset class="form-group">
-              <legend class="border-bottom mb-4">Profile Info</legend>
+      <details>
+          <style>
+            details > summary {
+              list-style: none;
+            }
+            details > summary::-webkit-details-marker {
+              display: none;
+            }
+          </style>
+          <summary><p class="btn btn-primary" type="submit">Change profile info</p></summary>
+            <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
               {{ u_form|crispy }}
               {{ p_form|crispy }}
-          </fieldset>
-          <div class="form-group">
-              <button class="btn btn-primary" type="submit">Update</button>
-          </div>
-      </form>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Update</button>
+            </div>
+            </form>
+      </details>
    </div>
 {% endblock %}
