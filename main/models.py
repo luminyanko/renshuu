@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 # Create your models here.
@@ -17,6 +18,9 @@ class Dictionary(models.Model):
     class Meta:
         verbose_name = "Dictionary"
         verbose_name_plural = "Dictionaries"
+
+    def get_absolute_url(self):
+        return reverse('dictionary-detail', kwargs={'pk': self.pk})
 
 
 # each question in dictionary
