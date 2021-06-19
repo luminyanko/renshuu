@@ -6,10 +6,27 @@ Renshuu | Dictionary
 {% endblock %}
 
 {% block content %}
-    <button type="button" class="btn btn-primary m-2"><a href="{% url 'practice' %}" class="text-light text-decoration-none">Back</a></button>
+    <button type="button" class="btn btn-primary m-2"><a href="{% url 'practice' %}" class="text-light text-decoration-none">< Back</a></button>
     <div class="m-2">
         <h3>{{ object.name }}</h3>
         <small>Created: {{ object.created }}</small><br>
         <small>by: {{ object.creator }}</small>
+    </div>
+    <div>
+        {% if object.creator == user %}
+        <button type="button" class="btn btn-primary m-2"><a href="{% url 'dictionary-update' object.id %}" class="text-light text-decoration-none">Change name</a></button>
+        <button type="button" class="btn btn-secondary m-2"><a href="{% url 'dictionary-delete' object.id %}" class="text-light text-decoration-none">Delete dictionary</a></button>
+        {% endif %}
+    </div>
+
+    <div class="d-flex flex-row justify-content-start">
+        {% for el in task_list %}
+            {% if el.dictionary.id == object.id %}
+                <div class="alert alert-primary m-2 ">
+                    <small>{{ el.question }}</small><br>
+                    <small>{{ el.answer }}</small><br>
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
 {% endblock %}

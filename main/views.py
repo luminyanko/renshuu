@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect
-from django.contrib import messages
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import (
@@ -13,6 +12,19 @@ from .models import Task, Dictionary
 from .forms import TaskForm, DictionaryForm
 
 
+class TaskListView(ListView):
+    queryset = Task.objects.order_by('-question')
+    context_object_name = 'task_list'
+
+
+class TaskCreateView(LoginRequiredMixin, CreateView):
+    model = Task
+    fields = ['question', 'answer']
+
+    def form_valid(self, form):
+        form.instance.dictionary = get_object_or_404(Dictionary)
+
+
 class DictionaryListView(ListView):
     model = Dictionary
     template_name = 'main/practice.html'
@@ -22,6 +34,11 @@ class DictionaryListView(ListView):
 
 class DictionaryDetailView(DetailView):
     model = Dictionary
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['task_list'] = Task.objects.all()
+        return context
 
 
 class DictionaryCreateView(LoginRequiredMixin, CreateView):
@@ -66,6 +83,7 @@ def index(request):
 def practice(request):
     context = {
         'dicts': Dictionary.objects.all(),
+        'questions': Task.objects.all(),
         'user': User
     }
     return render(request, 'main/practice.html', context)
@@ -73,19 +91,3 @@ def practice(request):
 
 def about(request):
     return render(request, 'main/about.html')
-
-
-def create(request):
-    error = ''
-    if request.method == 'POST':
-        form = DictionaryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-        else:
-            error = 'Invalid input'
-    form = DictionaryForm()
-    context = {
-        'form': form
-    }
-    return render(request, 'main/dictionary_form.html', context)

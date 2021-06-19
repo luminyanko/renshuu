@@ -7,7 +7,7 @@ Renshuu | Practice
 
 {% block content %}
     {% if user.is_authenticated %}
-        <legend class="border-bottom m-2">My Dictionaries</legend>
+        <legend class="m-2">My Dictionaries</legend>
         <button type="button" class="btn btn-primary m-2"><a href="{% url 'dictionary-create' %}" class="text-light text-decoration-none">Create new dictionary</a></button>
     {% endif %}
     {% if dicts %}
@@ -16,19 +16,21 @@ Renshuu | Practice
             {% if el.creator == user %}
             <div class="alert alert-primary m-2 ">
                     <h3><a href="{% url 'dictionary-detail' el.id %}" class="text-body text-decoration-none">{{ el.name }}</a></h3>
-                    <small>Created: {{ el.created }}</small>
+                    <small>Created: {{ el.created }}</small><br>
+                    <small>rate: {{ el.rate }}</small>
             </div>
             {% endif %}
         {% endfor %}
         </div>
-        <legend class="border-bottom m-2">Other Dictionaries</legend>
+        <legend class="m-2">Other Dictionaries</legend>
         <div class="d-flex flex-row justify-content-start">
             {% for el in dicts %}
                 {% if el.creator != user %}
                 <div class="alert alert-primary m-2 ">
                         <h3><a href="{% url 'dictionary-detail' el.id %}" class="text-body text-decoration-none">{{ el.name }}</a></h3>
                         <small>Created: {{ el.created }}</small><br>
-                        <small>by: {{ el.creator }}</small>
+                        <small>by: {{ el.creator }}</small><br>
+                        <small>rate: {{ el.rate }}</small>
                 </div>
                 {% endif %}
             {% endfor %}
