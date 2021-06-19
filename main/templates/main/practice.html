@@ -8,7 +8,7 @@ Renshuu | Practice
 {% block content %}
     {% if user.is_authenticated %}
         <legend class="m-2">My Dictionaries</legend>
-        <button type="button" class="btn btn-primary m-2"><a href="{% url 'dictionary-create' %}" class="text-light text-decoration-none">Create new dictionary</a></button>
+        <a type="button" href="{% url 'dictionary-create' %}" class=" btn btn-primary text-light text-decoration-none m-2">Create new dictionary</a>
     {% endif %}
     {% if dicts %}
         <div class="d-flex flex-row justify-content-start">
@@ -36,6 +36,6 @@ Renshuu | Practice
             {% endfor %}
             </div>
     {% else %}
-        <p>No cards yet.</p>
+        <p class="m-2">No dictionaries yet.</p>
     {% endif %}
 {% endblock %}

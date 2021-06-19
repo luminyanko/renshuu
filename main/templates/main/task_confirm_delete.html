@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-Renshuu | Delete dictionary
+Renshuu | Delete word
 {% endblock %}
 
 {% block content %}
@@ -9,12 +9,12 @@ Renshuu | Delete dictionary
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-2">Delete Dictionary</legend>
-                <h3>Are you sure you want to delete {{ object.name }}?</h3>
+                <legend class="border-bottom mb-2">Delete word</legend>
+                <h3>Are you sure you want to delete {{ object.question }} : {{ object.answer }}?</h3>
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-danger mt-2" type="submit">Yes</button>
-                <a type="button" class="btn btn-outline-secondary mt-2" href="{% url 'dictionary-detail' object.id %}">No</a>
+                <a class="btn btn-outline-secondary mt-2" href="{% url 'dictionary-edit' object.dictionary.id %}">No</a>
             </div>
         </form>
     </div>

@@ -6,25 +6,29 @@ Renshuu | Dictionary
 {% endblock %}
 
 {% block content %}
-    <button type="button" class="btn btn-primary m-2"><a href="{% url 'practice' %}" class="text-light text-decoration-none">< Back</a></button>
+    <a type="button" href="{% url 'practice' %}" class=" btn btn-primary text-light text-decoration-none m-2">< Back</a>
     <div class="m-2">
         <h3>{{ object.name }}</h3>
         <small>Created: {{ object.created }}</small><br>
         <small>by: {{ object.creator }}</small>
     </div>
-    <div>
+    <div class="d-flex flex-row justify-content-start">
         {% if object.creator == user %}
-        <button type="button" class="btn btn-primary m-2"><a href="{% url 'dictionary-update' object.id %}" class="text-light text-decoration-none">Change name</a></button>
-        <button type="button" class="btn btn-secondary m-2"><a href="{% url 'dictionary-delete' object.id %}" class="text-light text-decoration-none">Delete dictionary</a></button>
+            <a type="button" href="{% url 'task-create' pk=object.id%}" class="btn btn-primary m-2 text-light text-decoration-none"> + </a>
+            {% block edit_btn %}
+                <a type="button" href="{% url 'dictionary-edit' object.id %}" class="btn btn-info m-2 text-light text-decoration-none">Edit mode</a>
+            {% endblock %}
+            <a type="button" href="{% url 'dictionary-update' object.id %}" class="btn btn-info m-2 text-light text-decoration-none">Change name</a>
+            <a type="button" href="{% url 'dictionary-delete' object.id %}" class="btn btn-info m-2 text-light text-decoration-none">Delete dictionary</a>
         {% endif %}
     </div>
-
-    <div class="d-flex flex-row justify-content-start">
+    <div class="d-flex flex-row justify-content-start flex-wrap">
         {% for el in task_list %}
             {% if el.dictionary.id == object.id %}
-                <div class="alert alert-primary m-2 ">
-                    <small>{{ el.question }}</small><br>
-                    <small>{{ el.answer }}</small><br>
+                <div class="alert alert-primary m-2">
+                    <h5>{{ el.question }}</h5>
+                    <h5>{{ el.answer }}</h5>
+                    {% block editing %}{% endblock %}
                 </div>
             {% endif %}
         {% endfor %}

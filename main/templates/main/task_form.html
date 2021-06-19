@@ -10,11 +10,11 @@ Renshuu | Registration
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group w-25">
-                <legend class="mb-2">Dictionary</legend>
+                <legend class="mb-2">New card</legend>
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-primary mt-2" type="submit">Confirm</button>
+                <button class="btn btn-primary mt-2" type="submit" >Confirm</button>
             </div>
         </form>
     </div>
