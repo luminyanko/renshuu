@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'main',
     'users',
+    'lessons.apps.LessonsConfig',
 ]
 
 MIDDLEWARE = [
