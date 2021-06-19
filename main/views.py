@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
@@ -25,27 +26,9 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class TaskUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Task
-    fields = ['question', 'answer']
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-    def test_func(self):
-        dictionary = self.get_object()
-        if self.request.user == dictionary.creator:
-            return True
-        return False
-
-
 class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Task
-    success_url = '/dictionary_edit.html'
-
-    def get(self, request, *args, **kwargs):
-        return self.post(request, *args, **kwargs)
+    success_url = '/practice'
 
     def test_func(self):
         return True

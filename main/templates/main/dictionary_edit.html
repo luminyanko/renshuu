@@ -5,10 +5,7 @@
 {% endblock %}
 
 {% block editing %}
-    <div class="d-flex justify-content-between ">
-        <form method="POST" class="text-decoration-none text-danger" action="{% url 'task-delete' object.id %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-outline-danger">del</button>
-        </form>
+    <div class="d-flex justify-content-around">
+        <a type="button" class="btn btn-outline-danger" href="{% url 'task-delete' el.id %}">del</a>
     </div>
 {% endblock %}
