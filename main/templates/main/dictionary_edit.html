@@ -1,0 +1,14 @@
+{% extends 'main/dictionary_detail.html' %}
+
+{% block edit_btn %}
+    <a type="button" href="{% url 'dictionary-detail' object.id %}" class="btn btn-info m-2 text-light text-decoration-none">View mode</a>
+{% endblock %}
+
+{% block editing %}
+    <div class="d-flex justify-content-between ">
+        <form method="POST" class="text-decoration-none text-danger" action="{% url 'task-delete' object.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger">del</button>
+        </form>
+    </div>
+{% endblock %}

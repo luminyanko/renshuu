@@ -27,7 +27,7 @@ class Dictionary(models.Model):
 class Task(models.Model):
     dictionary = models.ForeignKey(Dictionary, on_delete=models.CASCADE)
     question = models.CharField('Question', max_length=150)
-    answer = models.TextField('Answer', max_length=150)
+    answer = models.CharField('Answer', max_length=150)
 
     def __str__(self):
         return self.question
@@ -36,3 +36,6 @@ class Task(models.Model):
         verbose_name = "Question"
         verbose_name_plural = "Questions"
         ordering = ['question']
+
+    def get_absolute_url(self):
+        return reverse('dictionary-detail', kwargs={'pk': self.dictionary.id})

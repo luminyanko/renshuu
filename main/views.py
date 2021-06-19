@@ -9,7 +9,6 @@ from django.views.generic import (
     DeleteView
 )
 from .models import Task, Dictionary
-from .forms import TaskForm, DictionaryForm
 
 
 class TaskListView(ListView):
@@ -22,7 +21,34 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     fields = ['question', 'answer']
 
     def form_valid(self, form):
-        form.instance.dictionary = get_object_or_404(Dictionary)
+        form.instance.dictionary = Dictionary.objects.get(id=self.kwargs['pk'])
+        return super().form_valid(form)
+
+
+class TaskUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Task
+    fields = ['question', 'answer']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        dictionary = self.get_object()
+        if self.request.user == dictionary.creator:
+            return True
+        return False
+
+
+class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Task
+    success_url = '/dictionary_edit.html'
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
+    def test_func(self):
+        return True
 
 
 class DictionaryListView(ListView):
@@ -34,6 +60,16 @@ class DictionaryListView(ListView):
 
 class DictionaryDetailView(DetailView):
     model = Dictionary
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['task_list'] = Task.objects.all()
+        return context
+
+
+class DictionaryDetailEditView(DetailView):
+    model = Dictionary
+    template_name = 'main/dictionary_edit.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -55,7 +91,7 @@ class DictionaryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     fields = ['name']
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form.instance.creator = self.request.user
         return super().form_valid(form)
 
     def test_func(self):
