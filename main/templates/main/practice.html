@@ -7,7 +7,7 @@ Renshuu | Practice
 
 {% block content %}
     {% if user.is_authenticated %}
-        <legend class="m-2">My Dictionaries</legend>
+        <legend class="m-2 mt-0">My Dictionaries</legend>
         <a type="button" href="{% url 'dictionary-create' %}" class=" btn btn-primary text-light text-decoration-none m-2">Create new dictionary</a>
     {% endif %}
     {% if dicts %}
