@@ -6,7 +6,10 @@ Renshuu | Edit {{object.title}}
 {% endblock %}
 
 {% block content %}
-    <a type="button" href="{% url 'lessons'%}" class=" btn btn-primary text-light text-decoration-none m-2">< Back</a>
+    <a type="button" href="{% url 'lessons'%}" class=" btn btn-primary text-light text-decoration-none m-2">
+        <img src="{% static 'icons/back-white.png' %}" height="15" width="15" class="mb-1">
+        Back
+    </a>
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
