@@ -12,23 +12,57 @@
 </head>
 <body>
      <div class="container">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-4 border-bottom">
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="{% url 'home' %}"><img src="{% static 'header-icon-48.png' %}"></a></li>
-            <li><a href="{% url 'home' %}" class="nav-link px-2 link-dark">Home</a></li>
-            <li><a href="{% url 'lessons'%}" class="nav-link px-2 link-dark">Lessons</a></li>
-            <li><a href="{% url 'practice' %}" class="nav-link px-2 link-dark">Practice</a></li>
-            <li><a href="{% url 'about' %}" class="nav-link px-2 link-dark">About</a></li>
+            <li>
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'header-icon-48.png' %}">
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'home' %}" class="nav-link px-2 link-dark">
+                    <img src="{% static 'icons/house.png' %}" height="15" width="15" class="mb-1">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'lessons'%}" class="nav-link px-2 link-dark">
+                    <img src="{% static 'icons/folder.png' %}" height="15" width="15" class="mb-1">
+                    Lessons
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'practice' %}" class="nav-link px-2 link-dark">
+                    <img src="{% static 'icons/book.png' %}" height="15" width="15" class="mb-1">
+                    Practice
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'about' %}" class="nav-link px-2 link-dark">
+                    <img src="{% static 'icons/star.png' %}" height="15" width="15" class="mb-1">
+                    About
+                </a>
+            </li>
           </ul>
 
           <div class="col-md-3 text-end">
             {% if user.is_authenticated %}
-            <button type="button" class="btn btn-primary me-2"><a href="{% url 'profile' %}" class="text-light text-decoration-none">Profile</a></button>
-            <button type="button" class="btn btn-outline-primary me-2"><a href="{% url 'logout' %}" class="text-decoration-none">Logout</a></button>
+            <a type="button" class="btn btn-primary text-light text-decoration-none me-2" href="{% url 'profile' %}">
+                Profile
+                <img src="{% static 'icons/avatar-white.png' %}" height="15" width="15" class="mb-1">
+            </a>
+            <a type="button" class="btn btn-outline-primary text-decoration-none me-2" href="{% url 'logout' %}">
+                Logout
+                <img src="{% static 'icons/logout-blue.png' %}" height="15" width="15" class="mb-1">
+            </a>
             {% else %}
-            <button type="button" class="btn btn-outline-primary me-2"><a href="{% url 'login' %}" class="text-decoration-none">Login</a></button>
-            <button type="button" class="btn btn-primary"><a href="{% url 'register' %}" class="text-light text-decoration-none">Sign Up</a></button>
+            <a type="button" class="btn btn-outline-primary text-decoration-none me-2" href="{% url 'login' %}">
+                Login
+                 <img src="{% static 'icons/avatar-blue.png' %}" height="15" width="15" class="mb-1">
+            </a>
+            <a type="button" class="btn btn-primary text-light text-decoration-none" href="{% url 'register' %}">
+                Sign Up
+            </a>
             {% endif %}
           </div>
         </header>
@@ -37,6 +71,7 @@
          {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}" role="alert">
+                    <img src="{% static 'icons/paper-plane.png' %}" height="15" width="15" class="mb-1">
                     {{ message }}
                 </div>
             {% endfor%}
