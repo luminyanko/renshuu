@@ -1,12 +1,16 @@
 {% extends 'main/base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block title %}
 Renshuu | New card
 {% endblock %}
 
 {% block content %}
     <div class="content-section">
-        <a type="button" href="{% url 'practice' %}" class=" btn btn-primary text-light text-decoration-none">< Back</a>
+        <a type="button" href="{% url 'practice'  %}" class=" btn btn-primary text-light text-decoration-none">
+            <img src="{% static 'icons/back-white.png' %}" height="15" width="15" class="mb-1">
+            Back
+        </a>
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group w-25">
