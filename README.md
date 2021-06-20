@@ -1,11 +1,9 @@
 # renshuu
 Implementation of a web application for creating public lessons dictionaries with words.
 
-*
-every authorised user can create public lesson (post) to share their experience. after create, they can edit post (change title, content or tag, delete post) 
+*every authorised user can create public lesson (post) to share their experience. after create, they can edit post (change title, content or tag, delete post) 
 every authorised user can create public dictionary for memorizing foreign words or any oher {question, answer} structure data. after creating it's possible to edit a dictionary (add/delete words, change title of a dict, delete dict).
-unauthorised user can only observe dictionaries and lessons, created by community
-*
+unauthorised user can only observe dictionaries and lessons, created by community*
 
 
 
