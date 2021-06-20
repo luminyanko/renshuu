@@ -12,10 +12,10 @@ Implementation of a small web application for creating public dictionaries with 
   * (owners) Create / Update / Delete 
   * (owners) Add words to a dictionary
   * access public dictionaries
-  * detailed wiew of each lesson
+  * detailed wiew of each dictionary
  
 * Lessons
-  * Create / Update / Delete (owners)
+  * (owners) Create / Update / Delet
   * detailed wiew of each lesson  
   
 ![db diagram](/diagram.png)
