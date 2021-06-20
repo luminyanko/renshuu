@@ -18,6 +18,7 @@ Implementation of a small web application for creating public dictionaries with 
   * Create / Update / Delete (owners)
   * detailed wiew of each lesson  
   
+![db diagram](/diagram.png)
   
 # TODO
  * sort lessons by tags
@@ -25,3 +26,4 @@ Implementation of a small web application for creating public dictionaries with 
  * popups for delete confirmations
  * navigate to user profile
  * minigame for words practice
+
