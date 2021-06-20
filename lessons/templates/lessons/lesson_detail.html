@@ -6,10 +6,16 @@ Renshuu | {{object.title}}
 {% endblock %}
 
 {% block content %}
-    <a type="button" href="{% url 'lessons' %}" class=" btn btn-primary text-light text-decoration-none m-2">< Back</a>
+    <a type="button" href="{% url 'lessons' %}" class=" btn btn-primary text-light text-decoration-none m-2">
+        <img src="{% static 'icons/back-white.png' %}" height="15" width="15" class="mb-1">
+        Back
+    </a>
     <legend class="m-2 mt-0">{{ object.title }}</legend>
     <div class="article-metadata m-2">
-        <small class="alert-info p-1">{{object.tag.tag_name}}</small>
+        <small class="alert-info p-1">
+            <img src="{% static 'icons/tag.png' %}" height="15" width="15" class="mb-1">
+            {{object.tag.tag_name}}
+        </small>
         <small class="text-muted">{{ object.date_created|date:"H:i F d, Y" }}</small>
         <small>by: <a class="mr-2" href="#">{{ object.author }}</a></small>
         <img class="rounded-circle" width="30" height="30" src="{{ object.author.profile.image.url }}" alt="profile_image">
