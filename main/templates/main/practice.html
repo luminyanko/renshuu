@@ -8,10 +8,13 @@ Renshuu | Practice
 {% block content %}
     {% if user.is_authenticated %}
         <legend class="m-2 mt-0">My Dictionaries</legend>
-        <a type="button" href="{% url 'dictionary-create' %}" class=" btn btn-primary text-light text-decoration-none m-2">Create new dictionary</a>
+        <a type="button" href="{% url 'dictionary-create' %}" class=" btn btn-primary text-light text-decoration-none m-2">
+            <img src="{% static 'icons/add.png' %}" height="20" width="20" class="mb-1">
+            Create new dictionary
+        </a>
     {% endif %}
     {% if dicts %}
-        <div class="d-flex flex-row justify-content-start">
+        <div class="d-flex flex-row justify-content-start flex-wrap">
         {% for el in dicts %}
             {% if el.creator == user %}
             <div class="alert alert-primary m-2 ">
@@ -22,8 +25,8 @@ Renshuu | Practice
             {% endif %}
         {% endfor %}
         </div>
-        <legend class="m-2">Other Dictionaries</legend>
-        <div class="d-flex flex-row justify-content-start">
+        <legend class="m-2">Community Dictionaries</legend>
+        <div class="d-flex flex-row justify-content-start flex-wrap">
             {% for el in dicts %}
                 {% if el.creator != user %}
                 <div class="alert alert-primary m-2 ">

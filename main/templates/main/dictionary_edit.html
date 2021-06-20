@@ -1,11 +1,20 @@
 {% extends 'main/dictionary_detail.html' %}
+{% load static %}
 
 {% block edit_btn %}
-    <a type="button" href="{% url 'dictionary-detail' object.id %}" class="btn btn-info m-2 text-light text-decoration-none">View mode</a>
+    <a type="button" href="{% url 'dictionary-detail' object.id %}" class="btn btn-info m-2 text-light text-decoration-none">
+        <img src="{% static 'icons/glasses.png' %}" height="20" width="20" class="mb-1">
+        View mode
+        <a type="button" href="{% url 'dictionary-update' object.id %}" class="btn btn-info m-2 text-light text-decoration-none">
+            Change name
+        </a>
+    </a>
 {% endblock %}
 
 {% block editing %}
     <div class="d-flex justify-content-around">
-        <a type="button" class="btn btn-outline-danger" href="{% url 'task-delete' el.id %}">delete</a>
+        <a type="button" class="btn btn-outline-danger" href="{% url 'task-delete' el.id %}">
+            <img src="{% static 'icons/garbage-red.png' %}" height="15" width="15" class="mb-1" alt="delete">
+        </a>
     </div>
 {% endblock %}
