@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+Renshuu | {{object.title}}
+{% endblock %}
+
+{% block content %}
+    <a type="button" href="{% url 'lessons' %}" class=" btn btn-primary text-light text-decoration-none m-2">< Back</a>
+    <legend class="m-2 mt-0">{{ object.title }}</legend>
+    <div class="article-metadata m-2">
+        <small class="alert-info p-1">{{object.tag.tag_name}}</small>
+        <small class="text-muted">{{ object.date_created|date:"H:i F d, Y" }}</small>
+        <small>by: <a class="mr-2" href="#">{{ object.author }}</a></small>
+        <img class="rounded-circle" width="30" height="30" src="{{ object.author.profile.image.url }}" alt="profile_image">
+    </div>
+    {% if object.author == user %}
+    <div class="m-2 text-light text-decoration-none">
+        <a type="button" href="{% url 'lesson-edit' object.id %}" class="btn btn-info text-light">Update lesson</a>
+        <a type="button" href="{% url 'lesson-delete' object.id %}" class="btn btn-info text-light">Delete lesson</a>
+    </div>
+    {% endif %}
+    <article class="media content-section">
+      <div class="media-body m-2 article-content">
+        {{ object.content }}
+      </div>
+    </article>
+{% endblock %}

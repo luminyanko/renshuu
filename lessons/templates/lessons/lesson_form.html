@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Renshuu | Edit {{object.title}}
+{% endblock %}
+
+{% block content %}
+    <a type="button" href="{% url 'lessons'%}" class=" btn btn-primary text-light text-decoration-none m-2">< Back</a>
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group w-75 m-2">
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-primary m-2" type="submit">Confirm</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
